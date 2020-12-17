@@ -11,7 +11,11 @@
       {{ product.description }}
     </p>
     <span class="product-price">&#8381; {{ product.price }}</span>
-    <AddInBasket :product="product" @addInBasket="addInBasket" />
+    <AddInBasket
+      :product="product"
+      @addInBasket="addInBasket"
+      @updateQuantity="updateQuantity"
+    />
   </div>
 </template>
 
@@ -36,6 +40,10 @@ export default {
   },
 
   methods: {
+    updateQuantity(product) {
+      this.$emit('updateQuantity', product);
+    },
+
     addInBasket(product) {
       this.$emit('addInBasket', product);
     },

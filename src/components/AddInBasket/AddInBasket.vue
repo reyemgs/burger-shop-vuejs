@@ -16,7 +16,7 @@
         @click="increaseQuantity"
       ></i>
     </div>
-    <button class="btn-in-basket" @click="addInBasket(product)">
+    <button class="btn-in-basket" @click="addInBasket">
       В корзину
     </button>
   </div>
@@ -36,18 +36,28 @@ export default {
     increaseQuantity() {
       if (this.product.quantity === 99) return;
       this.product.quantity += 1;
+      this.updateQuantity();
     },
 
     decreaseQuantity() {
       if (this.product.quantity === 1) return;
       this.product.quantity -= 1;
+      this.updateQuantity();
     },
 
-    addInBasket(product) {
+    updateQuantity() {
+      this.$emit('updateQuantity', {
+        id: this.product.id,
+        quantity: this.product.quantity,
+      });
+    },
+
+    addInBasket() {
       this.$emit('addInBasket', {
-        name: product.name,
-        quantity: product.quantity,
-        price: product.price,
+        id: this.product.id,
+        name: this.product.name,
+        quantity: this.product.quantity,
+        price: this.product.price,
       });
     },
   },
