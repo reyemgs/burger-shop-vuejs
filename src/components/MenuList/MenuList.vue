@@ -4,6 +4,7 @@
       v-for="category of categories"
       :category="category"
       :key="category.type"
+      @setCategory="setCategory"
     />
   </ul>
 </template>
@@ -20,6 +21,12 @@ export default {
 
   components: {
     MenuItem,
+  },
+
+  methods: {
+    setCategory(category) {
+      this.$emit('setCategory', category);
+    },
   },
 };
 </script>
