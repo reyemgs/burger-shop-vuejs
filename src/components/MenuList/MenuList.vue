@@ -2,6 +2,7 @@
   <ul class="menu-list">
     <MenuItem
       v-for="category of categories"
+      :current-category="currentCategory"
       :category="category"
       :key="category.type"
       @setCategory="setCategory"
@@ -16,6 +17,9 @@ export default {
   props: {
     categories: {
       type: Array,
+    },
+    currentCategory: {
+      type: String,
     },
   },
 

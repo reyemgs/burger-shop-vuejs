@@ -1,5 +1,9 @@
 <template>
-  <li class="menu-item" @click="setCategory">
+  <li
+    class="menu-item"
+    @click="setCategory"
+    :class="{ active: currentCategory === category.type ? true : false }"
+  >
     {{ category.name }}
   </li>
 </template>
@@ -10,7 +14,17 @@ export default {
     category: {
       type: Object,
     },
+    currentCategory: {
+      type: String,
+    },
   },
+
+  data() {
+    return {
+      active: false,
+    };
+  },
+
   methods: {
     setCategory() {
       this.$emit('setCategory', this.category.type);

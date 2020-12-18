@@ -5,6 +5,7 @@
     <div class="container">
       <div class="sidebar">
         <MenuList
+          :current-category="currentCategory"
           :categories="response.categories"
           @setCategory="setCategory"
         />
@@ -21,19 +22,22 @@
           :markets="response.markets"
           @addInBasket="addInBasket"
           @updateQuantity="updateQuantity"
+          @showModal="showModal = true"
         />
       </div>
     </div>
+    <Modal v-if="showModal" @close="showModal = false" />
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
+import Loader from '@/components/Loader/Loader.vue';
 import Header from '@/components/Header/Header.vue';
 import MenuList from '@/components/MenuList/MenuList.vue';
 import Basket from '@/components/Basket/Basket.vue';
 import ProductCard from '@/components/ProductCard/ProductCard.vue';
-import Loader from '@/components/Loader/Loader.vue';
+import Modal from '@/components/Modal/Modal.vue';
 
 export default {
   name: 'App',
@@ -44,11 +48,15 @@ export default {
     MenuList,
     Basket,
     ProductCard,
+    Modal,
   },
 
   data() {
     return {
       url: './data.json',
+      loading: true,
+      showModal: false,
+      currentCategory: 'pizza',
       addedProducts: [],
       response: {
         menu: [],
@@ -57,8 +65,6 @@ export default {
         ingridietns: {},
         markets: {},
       },
-      loading: true,
-      currentCategory: 'pizza',
     };
   },
 
@@ -89,11 +95,13 @@ export default {
         const filteredProducts = this.products.filter(
           product => product.category === category
         );
+        // console.log('[RENDER]: ', category);
         return filteredProducts;
       }
     },
 
     setCategory(category) {
+      if (this.currentCategory === category) return;
       this.currentCategory = category;
     },
 
@@ -103,7 +111,7 @@ export default {
           item => item.id === product.id
         );
 
-        if (updatedProduct !== -1) {
+        if (updatedProduct !== undefined) {
           updatedProduct.quantity = product.quantity;
         }
       }
