@@ -53,12 +53,16 @@ export default {
     },
 
     addInBasket() {
-      this.$emit('addInBasket', {
-        id: this.product.id,
-        name: this.product.name,
-        quantity: this.product.quantity,
-        price: this.product.price,
-      });
+      if (this.product.type === 'single') {
+        this.$emit('addInBasket', {
+          id: this.product.id,
+          name: this.product.name,
+          quantity: this.product.quantity,
+          price: this.product.price,
+        });
+      } else {
+        this.$emit('showModal');
+      }
     },
   },
 };

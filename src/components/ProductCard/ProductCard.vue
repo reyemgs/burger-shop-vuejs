@@ -14,6 +14,7 @@
     <AddInBasket
       :product="product"
       @addInBasket="addInBasket"
+      @showModal="showModal"
       @updateQuantity="updateQuantity"
     />
   </div>
@@ -46,6 +47,10 @@ export default {
 
     addInBasket(product) {
       this.$emit('addInBasket', product);
+    },
+
+    showModal() {
+      this.$emit('showModal');
     },
   },
 };
