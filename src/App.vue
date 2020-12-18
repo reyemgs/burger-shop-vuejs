@@ -16,7 +16,7 @@
       </div>
       <div class="content">
         <ProductCard
-          v-for="product of renderProductsByCategory(currentCategory)"
+          v-for="product of filteredProducts"
           :key="product.id"
           :product="product"
           :markets="response.markets"
@@ -57,6 +57,7 @@ export default {
       loading: true,
       showModal: false,
       currentCategory: 'pizza',
+      filteredProducts: [],
       addedProducts: [],
       response: {
         menu: [],
@@ -79,30 +80,30 @@ export default {
     },
   },
 
-  mounted() {
-    fetch(this.url)
+  async mounted() {
+    await fetch(this.url)
       .then(response => response.json())
       .then(json => {
         this.response = json;
         this.loading = false;
       })
       .catch(error => console.error(error));
+    this.renderProductsByCategory(this.currentCategory);
   },
 
   methods: {
     renderProductsByCategory(category) {
       if (this.products.length !== 0) {
-        const filteredProducts = this.products.filter(
+        this.filteredProducts = this.products.filter(
           product => product.category === category
         );
-        // console.log('[RENDER]: ', category);
-        return filteredProducts;
       }
     },
 
     setCategory(category) {
       if (this.currentCategory === category) return;
       this.currentCategory = category;
+      this.renderProductsByCategory(category);
     },
 
     updateQuantity(product) {
