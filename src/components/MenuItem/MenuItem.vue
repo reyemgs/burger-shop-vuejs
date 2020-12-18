@@ -19,12 +19,6 @@ export default {
     },
   },
 
-  data() {
-    return {
-      active: false,
-    };
-  },
-
   methods: {
     setCategory() {
       this.$emit('setCategory', this.category.type);
