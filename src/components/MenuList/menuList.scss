@@ -14,9 +14,8 @@
     color: $black;
     transition: 0.3s;
     &.active {
-      background: $yellow;
-      border-bottom: 2px solid $yellow-blind;
-      transform: scale(1.03, 1.03);
+      background: $red;
+      color: $white;
     }
     &:hover {
       border-right: 10px solid $red;
@@ -26,5 +25,4 @@
       border-top-right-radius: 20px;
     }
   }
-  
 }
