@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import AddInBasket from '../AddInBasket/AddInBasket.vue';
+import AddInBasket from './AddInBasket.vue';
 
 export default {
   props: {

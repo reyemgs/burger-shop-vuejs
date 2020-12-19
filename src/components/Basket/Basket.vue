@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import BasketProduct from '../BasketProduct/BasketProduct.vue';
+import BasketProduct from './BasketProduct.vue';
 
 export default {
   components: {

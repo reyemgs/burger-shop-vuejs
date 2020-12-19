@@ -5,24 +5,4 @@
   margin: 0px auto;
   -webkit-user-select: none;
   border-top-right-radius: 20px;
-  .menu-item {
-    background: $yellow;
-    padding: 10px 40px;
-    font-size: 20px;
-    font-weight: bold;
-    list-style: none;
-    color: $black;
-    transition: 0.3s;
-    &.active {
-      background: $red;
-      color: $white;
-    }
-    &:hover {
-      border-right: 10px solid $red;
-      transform: translateX(-10px);
-    };
-    &:first-child {
-      border-top-right-radius: 20px;
-    }
-  }
 }

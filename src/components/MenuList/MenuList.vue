@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import MenuItem from '../MenuItem/MenuItem.vue';
+import MenuItem from './MenuItem.vue';
 
 export default {
   props: {
