@@ -61,7 +61,12 @@ export default {
           price: this.product.price,
         });
       } else {
-        this.$emit('showModal');
+        this.$emit('showModal', {
+          id: this.product.id,
+          name: this.product.name,
+          quantity: this.product.quantity,
+          price: this.product.price,
+        });
       }
     },
   },

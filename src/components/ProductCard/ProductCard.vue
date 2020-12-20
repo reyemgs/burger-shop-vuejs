@@ -49,8 +49,8 @@ export default {
       this.$emit('addInBasket', product);
     },
 
-    showModal() {
-      this.$emit('showModal');
+    showModal(product) {
+      this.$emit('showModal', product);
     },
   },
 };
