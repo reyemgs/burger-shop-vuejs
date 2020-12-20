@@ -22,11 +22,16 @@
           :markets="response.markets"
           @addInBasket="addInBasket"
           @updateQuantity="updateQuantity"
-          @showModal="showModal = true"
+          @showModal="openModal"
         />
       </div>
     </div>
-    <Modal v-if="showModal" @close="showModal = false" />
+    <Modal
+      v-if="showModal"
+      :product="currentProduct"
+      :modalItems="response.modal"
+      @closeModal="showModal = false"
+    />
   </div>
 </template>
 
@@ -57,6 +62,7 @@ export default {
       loading: true,
       showModal: false,
       currentCategory: 'pizza',
+      currentProduct: {},
       filteredProducts: [],
       addedProducts: [],
       response: {
@@ -80,15 +86,15 @@ export default {
     },
   },
 
-  async mounted() {
-    await fetch(this.url)
+  mounted() {
+    fetch(this.url)
       .then(response => response.json())
       .then(json => {
         this.response = json;
         this.loading = false;
+        this.renderProductsByCategory(this.currentCategory);
       })
       .catch(error => console.error(error));
-    this.renderProductsByCategory(this.currentCategory);
   },
 
   methods: {
@@ -130,6 +136,11 @@ export default {
       if (!addedProduct) {
         this.addedProducts.push(product);
       }
+    },
+
+    openModal(product) {
+      this.showModal = true;
+      this.currentProduct = product;
     },
   },
 };
