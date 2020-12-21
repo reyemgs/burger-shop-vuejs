@@ -55,13 +55,11 @@
         padding: 0;
       }
       .modal-body {
-        flex: 1 0 auto;
-        height: 80%;
         text-align: center;
         margin-top: 20px;
       }
       .modal-footer {
-        padding-bottom: 10px;
+        // padding-bottom: 10px;
         flex: 0 0 auto;
         background: $yellow;
         text-align: center;
@@ -70,6 +68,7 @@
         border-bottom-left-radius: 10px;
 
         .modal-price {
+          vertical-align: middle;
           color: $red;
         }
         .modal-total-price {
