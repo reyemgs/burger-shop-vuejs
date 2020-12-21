@@ -67,8 +67,10 @@ export default {
         this.$emit('showModal', {
           id: this.product.id,
           name: this.product.name,
+          image: this.product.image,
           quantity: this.product.quantity,
           price: this.product.price,
+          components: this.product.components,
         });
       }
     },
