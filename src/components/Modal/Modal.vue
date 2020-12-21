@@ -23,15 +23,22 @@
             />
           </ul>
           <div class="modal-body">
-            <div class="modal-content"></div>
+            <div class="modal-content">
+              <IngridientCard
+                v-for="(value, property) in ingridientsByCategory"
+                :key="ingridientsByCategory[property].id"
+                :ingridient="ingridientsByCategory[property]"
+                :components="product.components"
+              />
+            </div>
           </div>
 
           <div class="modal-footer">
             <span v-if="currentCategory !== 'done'" class="modal-price"
-              >&#8381; {{ product.price }}</span
+              >{{ product.price }} &#8381;</span
             >
             <div v-else>
-              <span class="modal-total-price">&#8381; {{ totalPrice }}</span>
+              <span class="modal-total-price">{{ totalPrice }} &#8381;</span>
               <AddInBasket
                 :product="product"
                 :modalIsOpen="modalIsOpen"
@@ -49,11 +56,13 @@
 <script>
 import ModalNavItem from './ModalNavItem.vue';
 import AddInBasket from '../ProductCard/AddInBasket.vue';
+import IngridientCard from '../IngridientCard/IngridientCard.vue';
 
 export default {
   components: {
     ModalNavItem,
     AddInBasket,
+    IngridientCard,
   },
 
   props: {
@@ -61,6 +70,9 @@ export default {
       type: Array,
     },
     product: {
+      type: Object,
+    },
+    ingridients: {
       type: Object,
     },
     modalIsOpen: {
@@ -84,6 +96,10 @@ export default {
 
     totalPrice() {
       return this.product.price * this.product.quantity;
+    },
+
+    ingridientsByCategory() {
+      return this.ingridients[this.currentCategory];
     },
   },
 
