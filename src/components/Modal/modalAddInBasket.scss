@@ -1,24 +1,19 @@
 @import '../../style/_colors.scss';
 
 .add-in-basket {
-  -webkit-user-select: none;
-  width: 100%;
   margin: auto;
   text-align: center;
-  padding-bottom: 1rem;
   .product-quantity-label {
     display: block;
   }
   .product-quantity {
     display: inline-block;
     width: 40px;
-    height: 20px;
     font-size: 1.5rem;
   }
   .btn-increase,
   .btn-decrease {
     display: inline-block;
-    padding: 10px 5px;
     color: $black;
     .fa-plus-circle,
     .fa-minus-circle {
@@ -34,7 +29,6 @@
     display: block;
     margin: auto;
     width: 150px;
-    height: 40px;
     color: $black;
     font-size: 1.3rem;
     background: $yellow;
