@@ -30,6 +30,9 @@ export default {
       default: null,
       required: true,
     },
+    modalIsOpen: {
+      type: Boolean,
+    },
   },
 
   methods: {
@@ -53,7 +56,7 @@ export default {
     },
 
     addInBasket() {
-      if (this.product.type === 'single') {
+      if (this.product.type === 'single' || this.modalIsOpen) {
         this.$emit('addInBasket', {
           id: this.product.id,
           name: this.product.name,
