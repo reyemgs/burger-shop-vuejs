@@ -20,6 +20,7 @@
           :key="product.id"
           :product="product"
           :markets="response.markets"
+          :modalIsOpen="showModal"
           @addInBasket="addInBasket"
           @updateQuantity="updateQuantity"
           @showModal="openModal"
@@ -30,7 +31,10 @@
       v-if="showModal"
       :product="currentProduct"
       :modalItems="response.modal"
+      :modalIsOpen="showModal"
       @closeModal="showModal = false"
+      @addInBasket="addInBasket"
+      @updateQuantity="updateQuantity"
     />
   </div>
 </template>
@@ -61,7 +65,7 @@ export default {
       url: './data.json',
       loading: true,
       showModal: false,
-      currentCategory: 'pizza',
+      currentCategory: 'sandwiches',
       currentProduct: {},
       filteredProducts: [],
       addedProducts: [],
@@ -113,6 +117,10 @@ export default {
     },
 
     updateQuantity(product) {
+      if (this.showModal) {
+        this.updateModalQuantity(product);
+      }
+
       if (this.addedProducts.length !== 0) {
         const updatedProduct = this.addedProducts.find(
           item => item.id === product.id
@@ -129,6 +137,11 @@ export default {
       resetedProduct.quantity = 1;
     },
 
+    updateModalQuantity(product) {
+      const updatedProduct = this.products.find(item => item.id === product.id);
+      updatedProduct.quantity = product.quantity;
+    },
+
     addInBasket(product) {
       const addedProduct = this.addedProducts.find(
         item => item.id === product.id
@@ -136,6 +149,7 @@ export default {
       if (!addedProduct) {
         this.addedProducts.push(product);
       }
+      if (this.showModal) this.showModal = false;
     },
 
     openModal(product) {
