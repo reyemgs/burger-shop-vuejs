@@ -30,6 +30,7 @@
     <Modal
       v-if="showModal"
       :product="currentProduct"
+      :ingridients="ingridients"
       :modalItems="response.modal"
       :modalIsOpen="showModal"
       @closeModal="showModal = false"
@@ -73,7 +74,7 @@ export default {
         menu: [],
         categories: [],
         modal: [],
-        ingridietns: {},
+        ingridients: {},
         markets: {},
       },
     };
@@ -81,12 +82,26 @@ export default {
 
   computed: {
     products() {
+      let products = this.response.menu;
       let id = 1;
-      for (const product of this.response.menu) {
+      for (const product of products) {
         Vue.set(product, 'id', id++);
         Vue.set(product, 'quantity', 1);
       }
-      return this.response.menu;
+      return products;
+    },
+
+    ingridients() {
+      let ingridients = this.response.ingridients;
+      let id = 1;
+      for (const key in ingridients) {
+        for (const ingridient in ingridients[key]) {
+          Vue.set(ingridients[key][ingridient], 'id', id++);
+          Vue.set(ingridients[key][ingridient], 'key', ingridient);
+          Vue.set(ingridients[key][ingridient], 'category', key);
+        }
+      }
+      return ingridients;
     },
   },
 
