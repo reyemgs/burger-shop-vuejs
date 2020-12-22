@@ -33,7 +33,7 @@
       :ingridients="ingridients"
       :modalItems="response.modal"
       :modalIsOpen="showModal"
-      @closeModal="showModal = false"
+      @closeModal="closeModal"
       @addInBasket="addInBasket"
       @updateQuantity="updateQuantity"
     />
@@ -164,12 +164,18 @@ export default {
       if (!addedProduct) {
         this.addedProducts.push(product);
       }
-      if (this.showModal) this.showModal = false;
+      if (this.showModal) this.closeModal();
     },
 
     openModal(product) {
       this.showModal = true;
       this.currentProduct = product;
+      document.querySelector('body').style.overflow = 'hidden';
+    },
+
+    closeModal() {
+      this.showModal = false;
+      document.querySelector('body').removeAttribute('style');
     },
   },
 };
