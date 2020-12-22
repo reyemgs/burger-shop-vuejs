@@ -65,4 +65,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./basket.scss"></style>
+<style lang="scss" src="./scss/basket.scss"></style>

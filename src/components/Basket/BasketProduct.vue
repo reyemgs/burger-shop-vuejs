@@ -30,4 +30,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./basketProduct.scss"></style>
+<style lang="scss" src="./scss/basketProduct.scss"></style>

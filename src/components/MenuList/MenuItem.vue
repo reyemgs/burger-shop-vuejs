@@ -27,4 +27,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./menuItem.scss"></style>
+<style lang="scss" src="./scss/menuItem.scss"></style>

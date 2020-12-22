@@ -78,4 +78,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./addInBasket.scss"></style>
+<style lang="scss" src="./scss/addInBasket.scss"></style>

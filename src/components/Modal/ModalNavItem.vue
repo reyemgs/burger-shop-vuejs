@@ -27,4 +27,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./modalNavItem.scss"></style>
+<style lang="scss" src="./scss/modalNavItem.scss"></style>

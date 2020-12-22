@@ -56,4 +56,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./productCard.scss"></style>
+<style lang="scss" src="./scss/productCard.scss"></style>

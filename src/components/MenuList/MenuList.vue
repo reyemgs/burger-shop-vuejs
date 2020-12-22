@@ -35,4 +35,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./menuList.scss"></style>
+<style lang="scss" src="./scss/menuList.scss"></style>

@@ -24,12 +24,15 @@
           </ul>
           <div class="modal-body">
             <div class="modal-content">
-              <IngridientCard
-                v-for="(value, property) in ingridientsByCategory"
-                :key="ingridientsByCategory[property].id"
-                :ingridient="ingridientsByCategory[property]"
-                :components="product.components"
-              />
+              <div class="ingridients" v-if="currentCategory != 'done'">
+                <IngridientCard
+                  v-for="(value, property) in ingridientsByCategory"
+                  :key="ingridientsByCategory[property].id"
+                  :ingridient="ingridientsByCategory[property]"
+                  :components="product.components"
+                />
+              </div>
+              <DonePage v-else :product="product" :ingridients="ingridients" />
             </div>
           </div>
 
@@ -57,12 +60,14 @@
 import ModalNavItem from './ModalNavItem.vue';
 import AddInBasket from '../ProductCard/AddInBasket.vue';
 import IngridientCard from '../IngridientCard/IngridientCard.vue';
+import DonePage from '../DonePage/DonePage.vue';
 
 export default {
   components: {
     ModalNavItem,
     AddInBasket,
     IngridientCard,
+    DonePage,
   },
 
   props: {
@@ -83,6 +88,7 @@ export default {
   data() {
     return {
       currentCategory: 'sizes',
+      priceWithIngridients: this.product.price,
     };
   },
 
@@ -120,4 +126,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./modal.scss"></style>
+<style lang="scss" src="./scss/modal.scss"></style>
