@@ -13,6 +13,7 @@
     <span class="product-price">&#8381; {{ product.price }}</span>
     <AddInBasket
       :product="product"
+      :ingridients="ingridients"
       @addInBasket="addInBasket"
       @showModal="showModal"
       @updateQuantity="updateQuantity"
@@ -30,6 +31,9 @@ export default {
       default: null,
       required: true,
     },
+    ingridients: {
+      type: Object,
+    },
     markets: {
       type: Object,
       default: null,
@@ -38,6 +42,23 @@ export default {
 
   components: {
     AddInBasket,
+  },
+
+  computed: {
+    // priceWithIngridients() {
+    //   let price = this.product.price;
+    //   const components = this.product.components;
+    //   for (const category in components) {
+    //     if (!Array.isArray(components[category])) {
+    //       price += this.ingridients[category][components[category]].price;
+    //     } else {
+    //       for (const component of components[category]) {
+    //         price += this.ingridients[category][component].price;
+    //       }
+    //     }
+    //   }
+    //   return price;
+    // },
   },
 
   methods: {

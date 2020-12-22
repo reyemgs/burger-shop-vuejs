@@ -19,6 +19,7 @@
           v-for="product of filteredProducts"
           :key="product.id"
           :product="product"
+          :ingridients="ingridients"
           :markets="response.markets"
           :modalIsOpen="showModal"
           @addInBasket="addInBasket"
@@ -85,6 +86,9 @@ export default {
       let products = this.response.menu;
       let id = 1;
       for (const product of products) {
+        if (product.type === 'multiple') {
+          Vue.set(product, 'customPrice', product.price);
+        }
         Vue.set(product, 'id', id++);
         Vue.set(product, 'quantity', 1);
       }

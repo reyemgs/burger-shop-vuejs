@@ -21,6 +21,9 @@ export default {
     components: {
       type: Object,
     },
+    product: {
+      type: Object,
+    },
   },
 
   data() {

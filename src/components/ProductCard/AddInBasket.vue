@@ -30,8 +30,30 @@ export default {
       default: null,
       required: true,
     },
+    ingridients: {
+      type: Object,
+    },
     modalIsOpen: {
       type: Boolean,
+    },
+  },
+
+  // TODO: создать отдельный элемент для модалки
+  computed: {
+    priceWithIngridients() {
+      let price = this.product.price;
+      const components = this.product.components;
+
+      for (const category in components) {
+        if (!Array.isArray(components[category])) {
+          price += this.ingridients[category][components[category]].price;
+        } else {
+          for (const component of components[category]) {
+            price += this.ingridients[category][component].price;
+          }
+        }
+      }
+      return price;
     },
   },
 
@@ -56,12 +78,19 @@ export default {
     },
 
     addInBasket() {
-      if (this.product.type === 'single' || this.modalIsOpen) {
+      if (this.product.type === 'single') {
         this.$emit('addInBasket', {
           id: this.product.id,
           name: this.product.name,
           quantity: this.product.quantity,
           price: this.product.price,
+        });
+      } else if (this.modalIsOpen) {
+        this.$emit('addInBasket', {
+          id: this.product.id,
+          name: this.product.name,
+          quantity: this.product.quantity,
+          price: this.priceWithIngridients,
         });
       } else {
         this.$emit('showModal', {
@@ -69,7 +98,7 @@ export default {
           name: this.product.name,
           image: this.product.image,
           quantity: this.product.quantity,
-          price: this.product.price,
+          price: this.priceWithIngridients,
           components: this.product.components,
         });
       }

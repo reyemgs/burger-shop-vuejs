@@ -44,6 +44,7 @@
               <span class="modal-total-price">{{ totalPrice }} &#8381;</span>
               <AddInBasket
                 :product="product"
+                :ingridients="ingridients"
                 :modalIsOpen="modalIsOpen"
                 @addInBasket="addInBasket"
                 @updateQuantity="updateQuantity"
@@ -88,7 +89,6 @@ export default {
   data() {
     return {
       currentCategory: 'sizes',
-      priceWithIngridients: this.product.price,
     };
   },
 
