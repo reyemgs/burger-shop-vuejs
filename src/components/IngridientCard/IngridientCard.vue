@@ -39,6 +39,13 @@ export default {
         return components.includes(this.ingridient.key);
       }
     },
+
+    isSauces() {
+      return (
+        this.ingridient.category === 'sauces' &&
+        this.selectedComponents[this.ingridient.category].length === 3
+      );
+    },
   },
 
   methods: {
@@ -56,10 +63,14 @@ export default {
         const addedIngridient = components.find(
           item => item === this.ingridient.key
         );
+
         if (addedIngridient) {
           this.removeIngridient();
           return;
         }
+
+        if (this.isSauces) return;
+
         components.push(this.ingridient.key);
       }
     },
