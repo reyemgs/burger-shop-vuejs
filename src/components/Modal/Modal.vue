@@ -42,13 +42,29 @@
             >
             <div v-else>
               <span class="modal-total-price">{{ totalPrice }} &#8381;</span>
-              <AddInBasket
-                :product="product"
-                :ingridients="ingridients"
-                :modalIsOpen="modalIsOpen"
-                @addInBasket="addInBasket"
-                @updateQuantity="updateQuantity"
-              />
+              <div class="modal-add-in-basket">
+                <div class="modal-product-quantity-label">Количество</div>
+                <div class="modal-btn-decrease">
+                  <i
+                    class="fas fa-minus-circle"
+                    aria-hidden="true"
+                    @click="decreaseQuantity"
+                  ></i>
+                </div>
+                <span class="modal-product-quantity">{{
+                  product.quantity
+                }}</span>
+                <div class="modal-btn-increase">
+                  <i
+                    class="fas fa-plus-circle"
+                    aria-hidden="true"
+                    @click="increaseQuantity"
+                  ></i>
+                </div>
+                <button class="modal-btn-in-basket" @click="addInBasket">
+                  В корзину
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -59,14 +75,12 @@
 
 <script>
 import ModalNavItem from './ModalNavItem.vue';
-import AddInBasket from '../ProductCard/AddInBasket.vue';
 import IngridientCard from '../IngridientCard/IngridientCard.vue';
 import DonePage from '../DonePage/DonePage.vue';
 
 export default {
   components: {
     ModalNavItem,
-    AddInBasket,
     IngridientCard,
     DonePage,
   },
@@ -81,8 +95,8 @@ export default {
     ingridients: {
       type: Object,
     },
-    modalIsOpen: {
-      type: Boolean,
+    price: {
+      type: Number,
     },
   },
 
@@ -115,12 +129,24 @@ export default {
       this.currentCategory = item.category;
     },
 
-    updateQuantity(product) {
-      this.$emit('updateQuantity', product);
+    updateQuantity() {
+      this.$emit('updateQuantity', this.product);
     },
 
-    addInBasket(product) {
-      this.$emit('addInBasket', product);
+    increaseQuantity() {
+      if (this.product.quantity === 99) return;
+      this.product.quantity += 1;
+      this.updateQuantity();
+    },
+
+    decreaseQuantity() {
+      if (this.product.quantity === 1) return;
+      this.product.quantity -= 1;
+      this.updateQuantity();
+    },
+
+    addInBasket() {
+      this.$emit('addInBasket', this.product);
     },
   },
 };
