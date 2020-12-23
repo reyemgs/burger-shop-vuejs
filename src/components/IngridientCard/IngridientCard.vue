@@ -21,20 +21,11 @@ export default {
     components: {
       type: Object,
     },
-    product: {
-      type: Object,
-    },
-  },
-
-  data() {
-    return {
-      selectedComponents: this.components,
-    };
   },
 
   computed: {
     isAdded() {
-      const components = this.selectedComponents[this.ingridient.category];
+      const components = this.components[this.ingridient.category];
 
       if (!Array.isArray(components)) {
         return this.ingridient.key === components;
@@ -46,21 +37,17 @@ export default {
     isSauces() {
       return (
         this.ingridient.category === 'sauces' &&
-        this.selectedComponents[this.ingridient.category].length === 3
+        this.components[this.ingridient.category].length === 3
       );
     },
   },
 
   methods: {
     addIngridient() {
-      let components = this.selectedComponents[this.ingridient.category];
+      const components = this.components[this.ingridient.category];
 
       if (!Array.isArray(components)) {
-        Vue.set(
-          this.selectedComponents,
-          this.ingridient.category,
-          this.ingridient.key
-        );
+        Vue.set(this.components, this.ingridient.category, this.ingridient.key);
         return;
       } else {
         const addedIngridient = components.find(
