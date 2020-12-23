@@ -53,9 +53,13 @@ export default {
   },
 
   methods: {
+    // removeProduct(product) {
+    //   const index = this.addedProducts.findIndex(item => item === product);
+    //   this.addedProducts.splice(index, 1);
+    // },
+
     removeProduct(product) {
-      const index = this.addedProducts.findIndex(item => item === product);
-      this.addedProducts.splice(index, 1);
+      this.$emit('removeProduct', product);
     },
 
     resetQuantity(product) {
